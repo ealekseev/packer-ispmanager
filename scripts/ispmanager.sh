@@ -14,6 +14,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 apt-get -y --force-yes install \
 postfix \
+postfix-mysql \
 mysql-server \
 makepasswd \
 pure-ftpd-mysql \
@@ -21,7 +22,11 @@ courier-base \
 courier-imap \
 courier-imap-ssl \
 courier-pop \
-courier-pop-ssl
+courier-pop-ssl \
+courier-authlib-mysql \
+clamav-data \
+amavis \
+libmail-spamassassin-perl
 
 apt-get -y --force-yes install apache2 apache2-doc apache2-utils libapache2-mod-php5 php5 php5-common php5-gd php5-mysqlnd php5-imap phpmyadmin php5-cli php5-cgi libapache2-mod-fcgid apache2-suexec php-pear php-auth php5-mcrypt mcrypt php5-imagick imagemagick libapache2-mod-suphp libruby libapache2-mod-python php5-curl php5-intl php5-memcache php5-memcached php5-ming php5-ps php5-pspell php5-recode php5-snmp php5-sqlite php5-tidy php5-xmlrpc php5-xsl memcached snmp
 
@@ -42,7 +47,7 @@ tar xfz ISPConfig-3-stable.tar.gz
 cd ispconfig3_install/install/
 
 echo "[install]
-language=en
+language=ru
 install_mode=standard
 hostname=`hostname -s`.simplecloud.club
 mysql_hostname=localhost
@@ -93,3 +98,6 @@ create_new_ispconfig_ssl_cert=no
 reconfigure_crontab=yes" > autoinstall.ini
 
 php -q install.php --autoinstall=autoinstall.ini
+
+cd /
+rm -rf /tmp/ispconfig3_install
